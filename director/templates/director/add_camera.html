@@ -1,0 +1,70 @@
+<!-- SELECT2 EXAMPLE -->
+{% extends 'director/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block content %}
+<section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Add new Camera</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="{%url 'director:index' %}">Home</a></li>
+              <li class="breadcrumb-item active">Add camera</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+  <section class="content">
+        <div class="container-fluid">
+            <form method="POST">
+              <div class="card card-default">
+                <div class="card-header">
+                  <h3 class="card-title">Fill all given fields</h3>
+                </div>
+                <div class="card-body">
+                   {{form.media}}
+                   {% csrf_token %}
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="camera_name">Camera Title</label>
+                        {% render_field form.camera_name|attr:'required:true' class="form-control"  id="camera_name" placeholder="Camera Title" %}
+
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="web_address">Camera Web Address</label>
+                        {% render_field form.web_address|attr:'required:true' class="form-control"  id="web_address" placeholder="Camera Url" %}
+
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">City Camera Placed</label>
+                        {% render_field form.city|attr:'required:true' class="form-control"  id="city" placeholder="City" %}
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="location">Email address</label>
+                        {% render_field form.location|attr:'required:true' class="form-control"  id="location" placeholder="Location" %}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-info  float-right">Submit</button>
+                </div>
+              </div>
+            </form>
+        </div>
+  </section>
+
+{% endblock %}
+
+<!-- /.card -->
