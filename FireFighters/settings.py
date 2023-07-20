@@ -1,6 +1,5 @@
 from pathlib import Path
 import os
-import django_heroku
 import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -13,7 +12,7 @@ GOOGLE_API_KEY = 'AIzaSyBuCKyG8HD3LULHyRfgo20wp8xw3NrrIWM'
 DEBUG = False
 
 
-ALLOWED_HOSTS = ['https://efds-394dc13e551c.herokuapp.com/', '127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
