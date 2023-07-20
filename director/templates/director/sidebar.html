@@ -1,0 +1,50 @@
+{%load static%}
+<!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="{%url 'director:index'%}" class="brand-link">
+      <img src="{% static 'director/images/avatar.png'%}" alt="FIRE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">{{request.user.username}}</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+          <li class="nav-item menu-open">
+            <a href="{%url 'director:index' %}" class="nav-link">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Dashboard
+              </p>
+            </a>
+          </li>
+           <li class="nav-item menu-open">
+            <a href="{%url 'director:stream'%}" class="nav-link">
+              <i class="nav-icon fas fa-camera"></i>
+              <p>
+                Detect
+              </p>
+            </a>
+          </li>
+          <li class="nav-item menu-open">
+            <a href="{%url 'director:addCamera'%}" class="nav-link">
+              <i class="nav-icon fas fa-video"></i>
+              <p>
+                Add Camera
+              </p>
+            </a>
+          </li>
+
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>

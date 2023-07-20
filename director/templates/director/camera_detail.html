@@ -1,0 +1,188 @@
+<!-- SELECT2 EXAMPLE -->
+{% extends 'director/base.html' %}
+{% load static %}
+{% load my_custom_tags %}
+{% load widget_tweaks %}
+{% block content %}
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Detail</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="{% url 'director:index' user.pk %}">Dashboard</a></li>
+            <li class="breadcrumb-item">{{camera.camera_name|truncatechars:20}}</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-3">
+
+            <!-- Profile Image -->
+            <div class="card card-primary card-outline">
+              <div class="card-body box-profile">
+                <h3 class="profile-username text-center">{{camera.camera_name}}</h3>
+                <ul class="list-group list-group-unbordered mb-3">
+                  <li class="list-group-item">
+                    <b>Url</b> <a class="float-right">{{camera.web_address}}</a>
+                  </li>
+                  <li class="list-group-item">
+                    <b>City</b> <a class="float-right">{{camera.city}}</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="card-footer">
+                        <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                            <i class="nav-icon fas fa-edit mr-2"></i>Edit</button>
+                        <button type="button" class="btn btn-outline-danger float-right" data-bs-toggle="modal" data-bs-target="#exampleModal3">
+                            <i class="nav-icon fas fa-trash mr-2"></i>Delete</button>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+                          <!-- Worker Update button start-->
+
+                    <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg modal-dialog-centered">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="POST" class="forms-sample" enctype="multipart/form-data">
+                                  <div class="card card-default">
+                                    <div class="card-body">
+                                       {{form.media}}
+                                       {% csrf_token %}
+                                      <div class="row">
+                                        <div class="col-md-12">
+                                          <div class="form-group">
+                                            <label for="camera_name">Camera Title</label>
+                                            {% render_field form.camera_name|attr:'required:true' class="form-control"  id="camera_name" placeholder="Camera Title" %}
+
+                                          </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                          <div class="form-group">
+                                            <label for="web_address">Camera Web Address</label>
+                                            {% render_field form.web_address|attr:'required:true' class="form-control"  id="web_address" placeholder="Camera Url" %}
+
+                                          </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                          <div class="form-group">
+                                            <label for="exampleInputEmail1">City Camera Placed</label>
+                                            {% render_field form.city|attr:'required:true' class="form-control"  id="city" placeholder="City" %}
+                                          </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                          <div class="form-group">
+                                            <label for="location">Email address</label>
+                                            {% render_field form.location|attr:'required:true' class="form-control"  id="location" placeholder="Location" %}
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <button type="submit" name="camera_update_btn" class="btn btn-primary mr-2"> Update </button>
+                                        <button type="button" class="btn btn-secondary float-right" data-bs-dismiss="modal">Cancel</button>
+                                    </div>
+                                  </div>
+                                </form>
+                            </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Worker Update button end -->
+                              <!-- Class delete Editing start-->
+
+                                <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-md modal-dialog-centered">
+                                        <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h3 class="modal-title" id="exampleModalLabel2" align="center"><strong>Вы уверены, что хотите удалить {{worker.worker_name}}?</strong></h3>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="card">
+                                                <div class="card-body">
+
+                                                    <form class="forms-sample" method="post" enctype="multipart/form-data">
+                                                    <h5>Если вы удалите этого работника, вся информация об этом работнике будет удалена автоматически</h5>
+                                                    <h5>ВЫ СОГЛАСЕН С ЭТИМ?</h5>
+                                                    {% csrf_token %}
+
+                                                    <br>
+                                                    <button type="submit" name="worker_delete_btn" class="btn btn-danger mr-2"> Принять </button>
+                                                    <button type="button" class="btn btn-success" data-bs-dismiss="modal">Отменить</button>
+                                                    </form>
+                                                </div>
+                                                </div>
+                                        </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Class Delete end-->
+
+
+
+
+
+
+            <!-- /.card -->
+
+            <!-- About Me Box -->
+<!--            <div class="card card-primary">-->
+<!--              <div class="card-header">-->
+<!--                <h3 class="card-title">About Me</h3>-->
+<!--              </div>-->
+<!--              &lt;!&ndash; /.card-header &ndash;&gt;-->
+<!--              <div class="card-body">-->
+<!--                <img id="small-map" height="198" width="254" alt="Google Map" src="https://maps.google.com/maps?q=24.197611,120.780512" />-->
+<!--              </div>-->
+<!--              &lt;!&ndash; /.card-body &ndash;&gt;-->
+<!--            </div>-->
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+          <div class="col-md-9">
+            <div class="card card-primary card-outline">
+              <div class="card-header ">
+                <h3 class="card-title">Real Time Fire And Smoke Detection</h3>
+              </div><!-- /.card-header -->
+              <div class="card-body">
+				  {%if "rtsp:" not in camera.web_address %}
+                    <img class="card-img-top " src="{% static 'auth/images/cameranotfond.jpg' %}" alt="Dist Photo 1">
+                    {%else%}
+                    <img class="card-img-top" src="{% url 'director:videoDetect' camera_ip=camera.pk|to_str %}" alt="Dist Photo 1">
+                    {%endif%}
+              </div><!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+{% endblock %}
+
+<!-- /.card -->
